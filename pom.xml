@@ -21,6 +21,8 @@
 
     <maven.compiler.source>15</maven.compiler.source>
     <maven.compiler.target>15</maven.compiler.target>
+
+    <driver.folder>drivers/windows/</driver.folder>
   </properties>
 
   <dependencies>
@@ -88,7 +90,7 @@
             <configuration>
               <url>https://chromedriver.storage.googleapis.com/${version.chromedriver}/chromedriver_win32.zip</url>
               <unpack>true</unpack>
-              <outputDirectory>${basedir}/drivers/windows/</outputDirectory>
+              <outputDirectory>${basedir}/${driver.folder}</outputDirectory>
               <md5>${md5.chromedriver}</md5>
               <checkSignature>true</checkSignature>
             </configuration>
