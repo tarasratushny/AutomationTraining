@@ -21,11 +21,12 @@ public class AmazonSearchTest extends BaseTest{
     public void basicAmazonProductSearch(){
         driver.navigate().to(AMAZON_HOME_PAGE_URL);   // you can also use driver.get("AMAZON_HOME_PAGE_URL");
         String pageTitle = driver.getTitle();
-        Assert.assertEquals(pageTitle, AMAZON_HOME_PAGE_TITLE);
+        softAssert.assertEquals(pageTitle, AMAZON_HOME_PAGE_TITLE);
         driver.findElement(By.xpath(ACCEPT_COOKIES_BUTTON_XPATH)).click();
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(SEARCH_TERM);
         driver.findElement(By.xpath(SEARCH_BUTTON_XPATH)).click();
-        Assert.assertTrue(driver.findElement(By.xpath(SEARCH_RESULTS_BREADCRUMB_XPATH)).isDisplayed());
-        Assert.assertEquals(driver.findElements(By.xpath(SEARCH_RESULTS_DEPARTMENTS_IN_LEFT_MENU_XPATH)).get(TARGET_DEPARTMENT_INDEX).getText(),SEARCH_TERM);
+        softAssert.assertTrue(driver.findElement(By.xpath(SEARCH_RESULTS_BREADCRUMB_XPATH)).isDisplayed());
+        softAssert.assertEquals(driver.findElements(By.xpath(SEARCH_RESULTS_DEPARTMENTS_IN_LEFT_MENU_XPATH)).get(TARGET_DEPARTMENT_INDEX).getText(),SEARCH_TERM);
+        softAssert.assertAll();
     }
 }

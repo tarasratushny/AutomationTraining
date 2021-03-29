@@ -32,3 +32,13 @@ Part 2:
 
 3) Don't hardcode locators or test data inside test methods. Use at least constants.
   - in future we will provide test data from external files and xpath will be moved out from test itself.
+
+Part 3:
+
+There are 2 types of asserts:
+1) Hard Assert - fails test right when assertion fails. No further steps are executed.
+2) Soft Assert - if assert fails, test steps are still executed afterwards.
+ - if there is no "softAssert.assertAll();" at the end - test will be marked as passed.
+ - in order to generate valid report without false positive result, add "softAssert.assertAll();"
+ - soft asserts are useful when for example you need to check content of several elements on a page
+  and want to have feedback about all of them at once, even if some fail.
