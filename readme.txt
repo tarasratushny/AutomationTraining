@@ -54,3 +54,4 @@ Types of waiters:
   - Wait with condition - waits for condition to be true with defined timeout and default interval.
   - Fluent wait - the same, but you define interval.
 3) Don't mix Implicit and Explicit waits, as it may lead to unexpected driver behavior.
+

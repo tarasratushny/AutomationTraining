@@ -1,5 +1,6 @@
-package com.miamato;
+package com.miamato.examples;
 
+import com.miamato.BaseTest;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class ExplicitWaitExample extends BaseTest{
+public class ExplicitWaitExample extends BaseTest {
 
 
     static final String AMAZON_HOME_PAGE_URL = "https://www.amazon.co.uk/";

@@ -1,9 +1,10 @@
-package com.miamato;
+package com.miamato.examples;
 
+import com.miamato.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AssertComparison extends BaseTest{
+public class AssertComparison extends BaseTest {
 
     static final String AMAZON_HOME_PAGE_URL = "https://www.amazon.co.uk/";
     static final String AMAZON_HOME_PAGE_TITLE = "Amazon.co.uk";

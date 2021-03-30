@@ -8,15 +8,15 @@ import org.testng.asserts.SoftAssert;
 
 public abstract class BaseTest {
 
-    static WebDriver driver;
+    public static WebDriver driver;
     static final String CHROME_DRIVER_PATH = "drivers/windows/chromedriver.exe";
-    static SoftAssert softAssert;
+    public static SoftAssert softAssert;
 
     @BeforeClass
     public void setup(){
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         softAssert = new SoftAssert();
     }
 

@@ -1,5 +1,6 @@
-package com.miamato;
+package com.miamato.examples;
 
+import com.miamato.BaseTest;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;

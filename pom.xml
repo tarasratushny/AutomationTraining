@@ -19,6 +19,9 @@
     <version.chromedriver>89.0.4389.23</version.chromedriver>
     <md5.chromedriver>0bf4bc39f34cee67f5f95afd8a24c191</md5.chromedriver>
 
+    <version.aspectj>1.9.6</version.aspectj>
+    <version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
+
     <maven.compiler.source>15</maven.compiler.source>
     <maven.compiler.target>15</maven.compiler.target>
 
@@ -56,6 +59,12 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${version.guava}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>${version.aspectj}</version>
     </dependency>
 
   </dependencies>
@@ -97,7 +106,31 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${version.surefire.plugin}</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>${basedir}/TestNG.xml</suiteXmlFile>
+          </suiteXmlFiles>
+          <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${version.aspectj}/aspectjweaver-${version.aspectj}.jar"
+          </argLine>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${version.aspectj}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
     </plugins>
   </build>
+
+
 
 </project>
