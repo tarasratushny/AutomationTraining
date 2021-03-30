@@ -34,31 +34,21 @@ public class AmazonSearchTest extends BaseTest {
 
     @Test(dataProvider = "search-term-set")
     public void basicAmazonProductSearch(String searchTerm, String expectedDepartmentName){
-        System.out.println("Starting test for search term: " + searchTerm + " and expected department: " + expectedDepartmentName);
-
         driver.navigate().to(AMAZON_HOME_PAGE_URL);
         String pageTitle = driver.getTitle();
         Assert.assertEquals(pageTitle, AMAZON_HOME_PAGE_TITLE);
-
-
-        //If uncommented - will fail on second case
-        //driver.findElement(By.xpath(ACCEPT_COOKIES_BUTTON_XPATH)).click();
-
         acceptCookiesIfPopupPresent();
-
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(searchTerm);
         driver.findElement(By.xpath(SEARCH_BUTTON_XPATH)).click();
         Assert.assertTrue(driver.findElement(By.xpath(SEARCH_RESULTS_BREADCRUMB_XPATH)).isDisplayed());
         Assert.assertEquals(driver.findElements(By.xpath(SEARCH_RESULTS_DEPARTMENTS_IN_LEFT_MENU_XPATH)).get(TARGET_DEPARTMENT_INDEX).getText(),expectedDepartmentName);
-
-        System.out.println("End of test for search term: " + searchTerm);
     }
 
     private static void acceptCookiesIfPopupPresent(){
         try{
             driver.findElement(By.xpath(ACCEPT_COOKIES_BUTTON_XPATH)).click();
         } catch(NoSuchElementException e) {
-            System.out.println("Cookie accept pop-up is not displayed, so who cares");
+            logger.info("Cookies pop-up is not present on page");
         }
     }
 }

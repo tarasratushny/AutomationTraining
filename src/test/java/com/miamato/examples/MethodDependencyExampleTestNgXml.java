@@ -1,4 +1,4 @@
-package com.miamato.test;
+package com.miamato.examples;
 
 import com.miamato.BaseTest;
 import org.openqa.selenium.By;
@@ -35,10 +35,7 @@ public class MethodDependencyExampleTestNgXml extends BaseTest {
     public void a(String searchTerm, String expectedDepartmentName){
         acceptCookiesIfPopupPresent();
 
-        //Thread.sleep(10000);
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).clear();
-        //Thread.sleep(10000);
-
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(searchTerm);
         driver.findElement(By.xpath(SEARCH_BUTTON_XPATH)).click();
         Assert.assertTrue(driver.findElement(By.xpath(SEARCH_RESULTS_BREADCRUMB_XPATH)).isDisplayed());

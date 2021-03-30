@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="TestingSuite">
+  <listeners>
+    <listener class-name="com.miamato.TestResultsListener" />
+    <listener class-name="com.miamato.TestReporter" />
+  </listeners>
   <test name="DependencyExample">
-   <!-- <groups>
-      <dependencies>
-        <group name="groupA" depends-on="groupB"></group>
-      </dependencies>
-    </groups>
     <classes>
-      <class name="com.miamato.test.MethodDependencyExampleTestNgXml"></class>
-    </classes>-->
-    <classes>
-      <class name="com.miamato.test.AmazonSearchTest"></class>
+      <class name="com.miamato.test.AmazonSearchTest" />
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

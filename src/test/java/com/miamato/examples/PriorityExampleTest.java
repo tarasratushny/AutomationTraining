@@ -1,4 +1,4 @@
-package com.miamato.test;
+package com.miamato.examples;
 
 import com.miamato.BaseTest;
 import org.testng.annotations.Test;

@@ -14,6 +14,7 @@
     <version.selenium>4.0.0-beta-2</version.selenium>
     <version.guava>30.1-jre</version.guava>
     <version.slf4j.nop>2.0.0-alpha1</version.slf4j.nop>
+    <version.log4j>2.14.1</version.log4j>
 
     <version.download-maven-plugin>1.6.1</version.download-maven-plugin>
     <version.chromedriver>89.0.4389.23</version.chromedriver>
@@ -33,7 +34,6 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>${version.testng}</version>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -65,6 +65,18 @@
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
       <version>${version.aspectj}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${version.log4j}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${version.log4j}</version>
     </dependency>
 
   </dependencies>
