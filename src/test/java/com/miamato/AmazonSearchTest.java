@@ -1,7 +1,6 @@
 package com.miamato;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AmazonSearchTest extends BaseTest{

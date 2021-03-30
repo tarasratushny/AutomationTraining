@@ -42,3 +42,15 @@ There are 2 types of asserts:
  - in order to generate valid report without false positive result, add "softAssert.assertAll();"
  - soft asserts are useful when for example you need to check content of several elements on a page
   and want to have feedback about all of them at once, even if some fail.
+
+
+Part 4:
+
+Types of waiters:
+1) Implicit - global for all driver search operation, checks page dom with certain interval (not controlled).
+  Less recommended
+2) Explicit:
+  - Thread.sleep() - not driver method, just waits defined time interval. Not recommended
+  - Wait with condition - waits for condition to be true with defined timeout and default interval.
+  - Fluent wait - the same, but you define interval.
+3) Don't mix Implicit and Explicit waits, as it may lead to unexpected driver behavior.
