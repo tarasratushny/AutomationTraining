@@ -42,41 +42,46 @@ public class TestReporter implements IReporter {
 
                 //Print Suite detail in Console
 
-                logger.info("Suite Name->" + context.getName()
+                logSuiteDetails(context);
 
-                    + "::Report output Ditectory->" + context.getOutputDirectory()
+                logFailedTestsList(context);
+            }
+        }
+    }
+    private void logSuiteDetails(ITestContext context){
+        //Print Suite detail in Console
 
-                    + "::Suite Name->" + context.getSuite().getName()
+        logger.info("Suite Name->" + context.getName()
 
-                    + "\n     Start Date Time for execution->" + context.getStartDate()
+            + "::Report output Ditectory->" + context.getOutputDirectory()
 
-                    + "::End Date Time for execution->" + context.getEndDate());
+            + "::Suite Name->" + context.getSuite().getName()
 
-                //Get Map for only failed test cases
+            + "\n     Start Date Time for execution->" + context.getStartDate()
 
-                IResultMap resultMap = context.getFailedTests();
+            + "::End Date Time for execution->" + context.getEndDate());
+    }
 
-                //Get method detail of failed test cases
+    private void logFailedTestsList(ITestContext context) {
+        if(context.getFailedTests().size()>0) {
+            Collection<ITestNGMethod> failedMethods = context.getFailedTests().getAllMethods();
 
-                Collection<ITestNGMethod> failedMethods = resultMap.getAllMethods();
+            //Loop one by one in all failed methods
 
-                //Loop one by one in all failed methods
+            logger.info("--------FAILED TEST CASE---------");
 
-                logger.info("--------FAILED TEST CASE---------");
+            for (ITestNGMethod iTestNGMethod : failedMethods) {
 
-                for (ITestNGMethod iTestNGMethod : failedMethods) {
+                //Print failed test cases detail
 
-                    //Print failed test cases detail
+                logger.info("TESTCASE NAME->" + iTestNGMethod.getMethodName()
 
-                    logger.info("TESTCASE NAME->" + iTestNGMethod.getMethodName()
+                    + "\nDescription->" + iTestNGMethod.getDescription()
 
-                        + "\nDescription->" + iTestNGMethod.getDescription()
+                    + "\nPriority->" + iTestNGMethod.getPriority()
 
-                        + "\nPriority->" + iTestNGMethod.getPriority()
+                    + "\n:Date->" + new Date(iTestNGMethod.getDate()));
 
-                        + "\n:Date->" + new Date(iTestNGMethod.getDate()));
-
-                }
             }
         }
     }

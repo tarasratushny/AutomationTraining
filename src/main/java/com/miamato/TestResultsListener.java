@@ -24,6 +24,7 @@ public class TestResultsListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         logger.error(result.getTestClass().getName() + "." + result.getMethod().getMethodName() + " --- Test case FAILED");
+        logger.error(result.getThrowable());
     }
 
     @Override

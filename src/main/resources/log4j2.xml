@@ -2,7 +2,7 @@
 <Configuration status="INFO">
 
   <Properties>
-    <Property name="basePath">./target/logs</Property>
+    <Property name="basePath">./logs</Property>
   </Properties>
 
   <Appenders>

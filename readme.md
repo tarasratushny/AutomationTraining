@@ -57,9 +57,17 @@ Types of waiters:
 
 ===
 
-Part 7: 
+Part 7.1: 
 1) Added dependency for browser manager.
 2) You can use testng @Parameters to pass desired browser name through testng.xml
 - if you want to select other browser when you execute test from command line, you can specify it value, for example 
   mvn -DbrowserName=Firefox test
 - you can use @Optional - to provide default value, to be able to execute the test through IDE. 
+3) Example of parallel execution in two different threads.
+
+-- there is a problem with firefox browser, it throws errors in console, though they don't influence test execution
+
+Part 7.2
+1) Example of custom driver manager.
+2) Removed parallel execution option. 
+3) Small updates for logging
