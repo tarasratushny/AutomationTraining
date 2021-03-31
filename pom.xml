@@ -16,6 +16,8 @@
     <version.slf4j.nop>2.0.0-alpha1</version.slf4j.nop>
     <version.log4j>2.14.1</version.log4j>
 
+
+    <version.webdrivermanager>4.3.1</version.webdrivermanager>
     <version.download-maven-plugin>1.6.1</version.download-maven-plugin>
     <version.chromedriver>89.0.4389.23</version.chromedriver>
     <md5.chromedriver>0bf4bc39f34cee67f5f95afd8a24c191</md5.chromedriver>
@@ -79,6 +81,13 @@
       <version>${version.log4j}</version>
     </dependency>
 
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>${version.webdrivermanager}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -95,8 +104,9 @@
     </testResources>
 
 
-    <!-- Downloading chrome driver executable-->
+
     <plugins>
+      <!-- Downloading chrome driver executable
       <plugin>
         <groupId>com.googlecode.maven-download-plugin</groupId>
         <artifactId>download-maven-plugin</artifactId>
@@ -118,6 +128,7 @@
           </execution>
         </executions>
       </plugin>
+      -->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

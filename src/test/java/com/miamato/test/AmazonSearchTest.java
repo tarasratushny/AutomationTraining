@@ -27,26 +27,26 @@ public class AmazonSearchTest extends BaseTest {
     public Object[][] searchTerms() {
         return new Object[][]
             {{SEARCH_TERM_DRILLS, SEARCH_TERM_DRILLS}
-            ,{SEARCH_TERM_SAWS, SEARCH_TERM_SAWS}
+          //  ,{SEARCH_TERM_SAWS, SEARCH_TERM_SAWS}
             ,{SEARCH_TERM_SAWS, SEARCH_RESULT_FIRST_SAWS_DEPARTMENT}};
     }
 
 
     @Test(dataProvider = "search-term-set")
     public void basicAmazonProductSearch(String searchTerm, String expectedDepartmentName){
-        driver.navigate().to(AMAZON_HOME_PAGE_URL);
-        String pageTitle = driver.getTitle();
+        driver.get().navigate().to(AMAZON_HOME_PAGE_URL);
+        String pageTitle = driver.get().getTitle();
         Assert.assertEquals(pageTitle, AMAZON_HOME_PAGE_TITLE);
         acceptCookiesIfPopupPresent();
-        driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(searchTerm);
-        driver.findElement(By.xpath(SEARCH_BUTTON_XPATH)).click();
-        Assert.assertTrue(driver.findElement(By.xpath(SEARCH_RESULTS_BREADCRUMB_XPATH)).isDisplayed());
-        Assert.assertEquals(driver.findElements(By.xpath(SEARCH_RESULTS_DEPARTMENTS_IN_LEFT_MENU_XPATH)).get(TARGET_DEPARTMENT_INDEX).getText(),expectedDepartmentName);
+        driver.get().findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(searchTerm);
+        driver.get().findElement(By.xpath(SEARCH_BUTTON_XPATH)).click();
+        Assert.assertTrue(driver.get().findElement(By.xpath(SEARCH_RESULTS_BREADCRUMB_XPATH)).isDisplayed());
+        Assert.assertEquals(driver.get().findElements(By.xpath(SEARCH_RESULTS_DEPARTMENTS_IN_LEFT_MENU_XPATH)).get(TARGET_DEPARTMENT_INDEX).getText(),expectedDepartmentName);
     }
 
     private static void acceptCookiesIfPopupPresent(){
         try{
-            driver.findElement(By.xpath(ACCEPT_COOKIES_BUTTON_XPATH)).click();
+            driver.get().findElement(By.xpath(ACCEPT_COOKIES_BUTTON_XPATH)).click();
         } catch(NoSuchElementException e) {
             logger.info("Cookies pop-up is not present on page");
         }

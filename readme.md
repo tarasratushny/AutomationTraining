@@ -55,3 +55,11 @@ Types of waiters:
   - Fluent wait - the same, but you define interval.
 3) Don't mix Implicit and Explicit waits, as it may lead to unexpected driver behavior.
 
+===
+
+Part 7: 
+1) Added dependency for browser manager.
+2) You can use testng @Parameters to pass desired browser name through testng.xml
+- if you want to select other browser when you execute test from command line, you can specify it value, for example 
+  mvn -DbrowserName=Firefox test
+- you can use @Optional - to provide default value, to be able to execute the test through IDE. 
