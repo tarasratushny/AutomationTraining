@@ -28,13 +28,18 @@
     <md5.edgedriver>6a82870f093a9a7d7972a4cfa331f72c</md5.edgedriver>
 
     <version.aspectj>1.9.6</version.aspectj>
+    <version.allure>2.13.8</version.allure>
+    <version.allure.maven>2.8</version.allure.maven>
+    <version.allure.reports>2.8.0</version.allure.reports>
     <version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <maven.compiler.source>15</maven.compiler.source>
     <maven.compiler.target>15</maven.compiler.target>
 
     <driver.folder>drivers/windows/</driver.folder>
     <testdata.property.path>testdata/default.properties</testdata.property.path>
+    <allure.results.path>target/allure-results</allure.results.path>
   </properties>
 
   <dependencies>
@@ -73,6 +78,12 @@
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
       <version>${version.aspectj}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>${version.allure}</version>
     </dependency>
 
     <dependency>
@@ -172,6 +183,7 @@
           <systemPropertyVariables>
             <driver.path>${driver.folder}</driver.path>
             <testdata.property.path>${testdata.property.path}</testdata.property.path>
+            <allure.results.directory>${basedir}/${allure.results.path}</allure.results.directory>
           </systemPropertyVariables>
         </configuration>
         <dependencies>
@@ -183,6 +195,17 @@
         </dependencies>
       </plugin>
 
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>${version.allure.maven}</version>
+        <configuration>
+          <reportVersion>${version.allure.reports}</reportVersion>
+          <allureDownloadUrl>https://github.com/allure-framework/allure2/releases/download/${version.allure.reports}/allure-${version.allure.reports}.zip</allureDownloadUrl>
+          <propertiesFilePath>${basedir}/src/main/resources/allure.properties</propertiesFilePath>
+          <reportDirectory>${basedir}/target/allure-report</reportDirectory>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
