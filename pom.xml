@@ -206,9 +206,8 @@
           <reportDirectory>${basedir}/target/allure-report</reportDirectory>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
-
-
 
 </project>
