@@ -62,39 +62,39 @@ public class SteamTest extends BaseTest {
         assertThatTextIsPresentInField(PDP_MAIN_PRODUCT_ORIGINAL_PRICE, GAME_WITH_DISCOUNT_ORIGINAL_PRICE);
     }
 
-    @Step
+    @Step("Press {0} key")
     private static void pressKey(Keys key){
         logger.info(SteamTest.class.getName() + " Pressing key: " + key.name());
         Actions actions = new Actions(driver);
         actions.sendKeys(key).perform();
     }
 
-    @Step
+    @Step("Enter text {1} into field with path {0}")
     private static void enterTextIntoField(String xpath, String text){
         logger.info(SteamTest.class.getName() + "Entering text: \"" + text + "\" into field with XPath: " + xpath);
         Actions actions = new Actions(driver);
         actions.sendKeys(findElement(xpath),text).perform();
     }
 
-    @Step
+    @Step("Open web page")
     private static void openWebPage(String url){
         logger.info(SteamTest.class.getName() + " Navigating to website with url:   " + url);
         driver.navigate().to(url);
     }
 
-    @Step
+    @Step("Click on element with xpath {0}")
     private static void clickOnElement(String xpath){
         clickOnElement(xpath, -1);
     }
 
-    @Step
+    @Step("Click on element from list with position {1}")
     private static void clickOnElement(String xpath, int position){
         logger.info(SteamTest.class.getName() + " Clicking on elment with xpath: " + xpath);
         Actions actions = new Actions(driver);
         actions.click(findElement(xpath, position)).perform();
     }
 
-    @Step
+    @Step("Select option {1} from drop-down with xpath {0}")
     private static void selectFromDropdownByValue(String xpath, String value){
         logger.info(SteamTest.class.getName() + " Trying to select option: \"" + value + "\" from dropdown with XPath: " + xpath );
         Select dropdown = new Select(findElement(xpath));
