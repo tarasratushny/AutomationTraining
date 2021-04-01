@@ -2,3 +2,5 @@
 AutomationTraining.iml
 /target
 /drivers
+/logs
+.allure
