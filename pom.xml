@@ -38,7 +38,7 @@
     <maven.compiler.target>15</maven.compiler.target>
 
     <driver.folder>drivers/windows/</driver.folder>
-    <testdata.property.path>testdata/default.properties</testdata.property.path>
+    <test.data.folder>testdata/</test.data.folder>
     <allure.results.path>target/allure-results</allure.results.path>
   </properties>
 
@@ -182,7 +182,7 @@
           </argLine>
           <systemPropertyVariables>
             <driver.path>${driver.folder}</driver.path>
-            <testdata.property.path>${testdata.property.path}</testdata.property.path>
+            <test.data.folder>${test.data.folder}</test.data.folder>
             <allure.results.directory>${basedir}/${allure.results.path}</allure.results.directory>
           </systemPropertyVariables>
         </configuration>

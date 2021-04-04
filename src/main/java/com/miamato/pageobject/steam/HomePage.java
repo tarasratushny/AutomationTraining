@@ -10,20 +10,18 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(HomePage.class.getSimpleName());
-    private static final String HOME_PAGE_URL = PropertyManager.getProperty("homepage.url");
-    private static final String PAGE_TITLE = PropertyManager.getProperty("homepage.title");
+    private final String HOME_PAGE_URL = propertyManager.getProperty("homepage.url");
+    private final String PAGE_TITLE = propertyManager.getProperty("homepage.title");
 
     @FindBy(xpath = "//input[@id='store_nav_search_term']")
-    public static WebElement SEARCH_FIELD;
+    public WebElement SEARCH_FIELD;
 
-    public HomePage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+    public HomePage(WebDriver driver, PropertyManager propertyManager){
+        super(driver, propertyManager);
     }
 
     @Step("Open application home page")

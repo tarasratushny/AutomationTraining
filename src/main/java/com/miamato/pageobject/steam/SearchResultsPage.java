@@ -1,5 +1,6 @@
 package com.miamato.pageobject.steam;
 
+import com.miamato.PropertyManager;
 import com.miamato.pageobject.BasePage;
 import io.qameta.allure.Step;
 import java.util.List;
@@ -16,12 +17,11 @@ public class SearchResultsPage extends BasePage {
     private static final Logger logger = LogManager.getLogger(SearchResultsPage.class.getSimpleName());
 
     @FindAll(@FindBy(xpath = "//a[contains(@class,'search_result_row')]"))
-    public static List<WebElement> SEARCH_RESULTS_PRODUCT_TILES;
+    public List<WebElement> SEARCH_RESULTS_PRODUCT_TILES;
 
 
-    public SearchResultsPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+    public SearchResultsPage(WebDriver driver, PropertyManager propertyManager){
+        super(driver, propertyManager);
     }
 
 

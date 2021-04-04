@@ -22,24 +22,29 @@ public abstract class BaseTest {
     protected WebDriver driver;
     public static final Logger assertLogger = LogManager.getLogger("Assert");
 
-    protected HomePage homePage = null;
-    protected SearchResultsPage searchResultsPage = null;
-    protected AgeConfirmationPage ageConfirmationPage = null;
-    protected ProductDetailsPage productDetailsPage = null;
-    protected DriverManager driverManager = null;
+    protected HomePage homePage;
+    protected SearchResultsPage searchResultsPage;
+    protected AgeConfirmationPage ageConfirmationPage;
+    protected ProductDetailsPage productDetailsPage;
+    protected DriverManager driverManager;
+    protected PropertyManager propertyManager;
 
-    @Parameters("browserName")
+    @Parameters({"browserName","testDataFileName"})
     @BeforeClass
-    public void setup(@Optional("Chrome") String browserName, ITestContext context){
+    public void setup(@Optional("Chrome") String browserName
+                , @Optional("default.properties") String testDataFileName
+                , ITestContext context){
         driverManager = new DriverManager();
         driver = driverManager.getDriver(browserName);
         context.setAttribute("WebDriver", driver);
         //driver.manage().window().maximize();
 
-        homePage = new HomePage(driver);
-        searchResultsPage = new SearchResultsPage(driver);
-        ageConfirmationPage = new AgeConfirmationPage(driver);
-        productDetailsPage = new ProductDetailsPage(driver);
+        propertyManager = new PropertyManager(testDataFileName);
+
+        homePage = new HomePage(driver, propertyManager);
+        searchResultsPage = new SearchResultsPage(driver, propertyManager);
+        ageConfirmationPage = new AgeConfirmationPage(driver, propertyManager);
+        productDetailsPage = new ProductDetailsPage(driver, propertyManager);
     }
 
     @AfterClass

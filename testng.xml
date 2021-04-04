@@ -7,12 +7,14 @@
   </listeners>
   <test name="Allure Reports Example Edge">
     <parameter name="browserName" value="Edge" />
+    <parameter name="testDataFileName" value="default.properties"/>
     <classes>
       <class name="com.miamato.steam.ProductInfoOnPdp" />
     </classes>
   </test>
   <test name="Allure Reports Example Chrome">
     <parameter name="browserName" value="Chrome" />
+    <parameter name="testDataFileName" value="otherEnv.properties" />
     <classes>
       <class name="com.miamato.steam.ProductInfoOnPdp" />
     </classes>

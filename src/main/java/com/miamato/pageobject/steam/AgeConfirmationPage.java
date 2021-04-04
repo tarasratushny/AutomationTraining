@@ -1,5 +1,6 @@
 package com.miamato.pageobject.steam;
 
+import com.miamato.PropertyManager;
 import com.miamato.pageobject.BasePage;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
@@ -14,20 +15,19 @@ public class AgeConfirmationPage extends BasePage {
     private static final Logger logger = LogManager.getLogger(AgeConfirmationPage.class.getSimpleName());
 
     @FindBy(xpath = "//select[@id='ageDay']")
-    public static WebElement BIRTH_DAY_DROPDOWN;
+    public WebElement BIRTH_DAY_DROPDOWN;
 
     @FindBy(xpath = "//select[@id='ageMonth']")
-    public static WebElement BIRTH_MONTH_DROPDOWN;
+    public WebElement BIRTH_MONTH_DROPDOWN;
 
     @FindBy(xpath = "//select[@id='ageYear']")
-    public static WebElement BIRTH_YEAR_DROPDOWN;
+    public WebElement BIRTH_YEAR_DROPDOWN;
 
     @FindBy(xpath = "//div[@class='agegate_text_container btns']/a[1]")
-    public static WebElement VIEW_PAGE_BUTTON;
+    public WebElement VIEW_PAGE_BUTTON;
 
-    public AgeConfirmationPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+    public AgeConfirmationPage(WebDriver driver, PropertyManager propertyManager){
+        super(driver, propertyManager);
     }
 
     @Step("Selecting birth date as: {day}/{month}/{year}")
