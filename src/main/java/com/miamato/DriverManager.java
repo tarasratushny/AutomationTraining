@@ -13,31 +13,22 @@ import org.openqa.selenium.firefox.ProfilesIni;
 
 public class DriverManager {
     private static final Logger log = LogManager.getLogger(DriverManager.class.getSimpleName());
-    private static DriverManager instance = null;
-    private static WebDriver chromeDriver = null;
-    private static WebDriver fireFoxDriver = null;
-    private static WebDriver edgeDriver = null;
 
-    private DriverManager(){
-        log.info("New driver manager created");
-    }
+    public WebDriver getDriver(String driverType){
 
-    public static WebDriver getDriver(String driverType){
-        if(instance == null)
-            instance = new DriverManager();
         WebDriver requestedDriver = null;
         switch (driverType.toUpperCase(Locale.ROOT)) {
             case "CHROME" -> {
                 log.info("Chrome driver selected");
-                requestedDriver = chromeDriver == null ? instance.initChrome() : chromeDriver;
+                requestedDriver = initChrome();
             }
             case "FIREFOX" -> {
                 log.info("Firefox driver selected");
-                requestedDriver = fireFoxDriver == null ? instance.initFirefox() : fireFoxDriver;
+                requestedDriver = initFirefox();
             }
             case "EDGE" -> {
                 log.info("Edge driver selected");
-                requestedDriver = edgeDriver == null ? instance.initEdge() : edgeDriver;
+                requestedDriver = initEdge();
             }
         }
         return requestedDriver;
@@ -46,8 +37,7 @@ public class DriverManager {
     private WebDriver initChrome(){
         log.info("Setting up new ChromeDriver");
         System.setProperty("webdriver.chrome.driver", System.getProperty("driver.path") + "/chromedriver.exe");
-        chromeDriver = new ChromeDriver();
-        return chromeDriver;
+        return new ChromeDriver();
     }
     private WebDriver initFirefox(){
         //firefox requires not only browser to be installed but also profile to be created.
@@ -56,14 +46,12 @@ public class DriverManager {
         FirefoxProfile profile = new ProfilesIni().getProfile("TestAutomation");
         FirefoxOptions ffOptions = new FirefoxOptions();
         ffOptions.setProfile(profile);
-        fireFoxDriver = new FirefoxDriver(ffOptions);
-        return fireFoxDriver;
+        return new FirefoxDriver(ffOptions);
     }
 
     private WebDriver initEdge(){
         log.info("Setting up new EdgeDriver");
         System.setProperty("webdriver.edge.driver", System.getProperty("driver.path") + "/msedgedriver.exe");
-        edgeDriver = new EdgeDriver();
-        return edgeDriver;
+        return new EdgeDriver();
     }
 }

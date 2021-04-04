@@ -1,4 +1,4 @@
-package com.miamato;
+package com.miamato.listeners;
 
 import java.util.Collection;
 import java.util.Date;

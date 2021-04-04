@@ -13,20 +13,13 @@ import org.openqa.selenium.WebDriver;
 public class HomePage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(HomePage.class.getSimpleName());
-    private static HomePage instance = null;
     private static final String HOME_PAGE_URL = PropertyManager.getProperty("homepage.url");
     private static final String PAGE_TITLE = PropertyManager.getProperty("homepage.title");
 
     public static final By SEARCH_FIELD = By.xpath("//input[@id='store_nav_search_term']");
 
-    private HomePage(WebDriver driver){
+    public HomePage(WebDriver driver){
         this.driver = driver;
-    }
-
-    public static HomePage getInstance(WebDriver driver){
-        if(instance == null)
-            instance = new HomePage(driver);
-        return instance;
     }
 
     @Step("Open application home page")
@@ -34,7 +27,7 @@ public class HomePage extends BasePage {
         logger.info("Trying to open application home page");
         openWebPage(HOME_PAGE_URL, logger);
         checkPageTitle(PAGE_TITLE, logger);
-        return instance;
+        return this;
     }
 
     @Step("Search for a product with name: {gameTitle}")
@@ -42,7 +35,7 @@ public class HomePage extends BasePage {
         logger.info("Performing search for product with title: " + gameTitle);
         enterTextIntoField(SEARCH_FIELD, gameTitle, logger);
         pressKey(Keys.ENTER, logger);
-        return instance;
+        return this;
     }
 
 }

@@ -1,7 +1,10 @@
 package com.miamato;
 
+import com.miamato.listeners.TestReporter;
+import com.miamato.listeners.TestResultsListener;
 import com.miamato.pageobject.steam.AgeConfirmationPage;
 import com.miamato.pageobject.steam.HomePage;
+import com.miamato.pageobject.steam.ProductDetailsPage;
 import com.miamato.pageobject.steam.SearchResultsPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,25 +15,29 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-@Listeners({TestResultsListener.class,TestReporter.class})
+@Listeners({TestResultsListener.class, TestReporter.class})
 public abstract class BaseTest {
 
-    public static WebDriver driver;
+    protected WebDriver driver;
     public static final Logger assertLogger = LogManager.getLogger("Assert");
 
     protected HomePage homePage = null;
     protected SearchResultsPage searchResultsPage = null;
     protected AgeConfirmationPage ageConfirmationPage = null;
+    protected ProductDetailsPage productDetailsPage = null;
+    protected DriverManager driverManager = null;
 
     @Parameters("browserName")
     @BeforeClass
     public void setup(@Optional("Chrome") String browserName){
-        driver = DriverManager.getDriver(browserName);
+        driverManager = new DriverManager();
+        driver = driverManager.getDriver(browserName);
         //driver.manage().window().maximize();
 
-        homePage = HomePage.getInstance(driver);
-        searchResultsPage = SearchResultsPage.getInstance(driver);
-        ageConfirmationPage = AgeConfirmationPage.getInstance(driver);
+        homePage = new HomePage(driver);
+        searchResultsPage = new SearchResultsPage(driver);
+        ageConfirmationPage = new AgeConfirmationPage(driver);
+        productDetailsPage = new ProductDetailsPage(driver);
     }
 
     @AfterClass

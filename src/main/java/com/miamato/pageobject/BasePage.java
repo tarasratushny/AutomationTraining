@@ -13,8 +13,6 @@ import org.testng.Assert;
 public abstract class BasePage extends Page {
 
     protected WebDriver driver;
-    private BasePage instance = null;
-
 
     protected void checkPageTitle(String title, Logger logger){
         logger.info("Verifying if page title is equal to: " + title);
