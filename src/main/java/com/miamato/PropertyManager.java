@@ -1,7 +1,5 @@
 package com.miamato;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +12,7 @@ public class PropertyManager {
     private static PropertyManager instance = null;
     private static final Properties properties = new Properties();
 
-    private PropertyManager() {
+    private PropertyManager(){
         loadProperties(System.getProperty("testdata.property.path"));
     }
 
@@ -24,15 +22,12 @@ public class PropertyManager {
         return properties.getProperty(propertyName);
     }
 
-    private void loadProperties(String filePath) {
+    private void loadProperties(String filePath){
         logger.info("Trying to access property file: " + filePath);
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
             properties.load(inputStream);
-        } catch (FileNotFoundException e) {
-            LogUtil.logStackTrace(e, logger);
-        } catch (IOException e) {
-            LogUtil.logStackTrace(e, logger);
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
+            logger.error("Property file with path: " + filePath + " cannot be opened");
             LogUtil.logStackTrace(e, logger);
         }
     }

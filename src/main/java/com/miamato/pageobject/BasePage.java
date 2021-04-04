@@ -1,6 +1,5 @@
 package com.miamato.pageobject;
 
-import com.miamato.LogUtil;
 import com.miamato.actions.Elements;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -18,15 +17,9 @@ public abstract class BasePage extends Page {
 
 
     protected void checkPageTitle(String title, Logger logger){
-        logger.info("Verifying if page title is correct");
-        try {
-            Assert.assertEquals(driver.getTitle(), title);
-            logger.info("Page title is correct: \"" + title + "\"");
-        } catch (Exception e) {
-            logger.error(e.getLocalizedMessage());
-            LogUtil.logStackTrace(e, logger);
-            throw e;
-        }
+        logger.info("Verifying if page title is equal to: " + title);
+        Assert.assertEquals(driver.getTitle(), title);
+        logger.info("Page title is correct: \"" + title + "\"");
     }
 
     protected void pressKey(Keys key, Logger logger){
@@ -63,7 +56,6 @@ public abstract class BasePage extends Page {
             dropdown.selectByValue(value);
         } catch (Exception e) {
             logger.error("Option cannot be selected from dropdown");
-            LogUtil.logStackTrace(e, logger);
             throw e;
         }
     }
