@@ -4,20 +4,30 @@ import com.miamato.pageobject.BasePage;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class AgeConfirmationPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(AgeConfirmationPage.class.getSimpleName());
 
-    public static final By BIRTH_DAY_DROPDOWN = By.xpath("//select[@id='ageDay']");
-    public static final By BIRTH_MONTH_DROPDOWN = By.xpath("//select[@id='ageMonth']");
-    public static final By BIRTH_YEAR_DROPDOWN = By.xpath("//select[@id='ageYear']");
-    public static final By VIEW_PAGE_BUTTON = By.xpath("//div[@class='agegate_text_container btns']/a[1]");
+    @FindBy(xpath = "//select[@id='ageDay']")
+    public static WebElement BIRTH_DAY_DROPDOWN;
+
+    @FindBy(xpath = "//select[@id='ageMonth']")
+    public static WebElement BIRTH_MONTH_DROPDOWN;
+
+    @FindBy(xpath = "//select[@id='ageYear']")
+    public static WebElement BIRTH_YEAR_DROPDOWN;
+
+    @FindBy(xpath = "//div[@class='agegate_text_container btns']/a[1]")
+    public static WebElement VIEW_PAGE_BUTTON;
 
     public AgeConfirmationPage(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(this.driver, this);
     }
 
     @Step("Selecting birth date as: {day}/{month}/{year}")

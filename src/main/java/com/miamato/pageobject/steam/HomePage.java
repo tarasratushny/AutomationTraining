@@ -6,9 +6,11 @@ import com.miamato.pageobject.BasePage;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends BasePage {
 
@@ -16,10 +18,12 @@ public class HomePage extends BasePage {
     private static final String HOME_PAGE_URL = PropertyManager.getProperty("homepage.url");
     private static final String PAGE_TITLE = PropertyManager.getProperty("homepage.title");
 
-    public static final By SEARCH_FIELD = By.xpath("//input[@id='store_nav_search_term']");
+    @FindBy(xpath = "//input[@id='store_nav_search_term']")
+    public static WebElement SEARCH_FIELD;
 
     public HomePage(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(this.driver, this);
     }
 
     @Step("Open application home page")

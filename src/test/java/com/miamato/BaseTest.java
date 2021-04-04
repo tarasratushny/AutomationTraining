@@ -30,7 +30,7 @@ public abstract class BaseTest {
 
     @Parameters("browserName")
     @BeforeClass
-    public void setup(@Optional("Chrome") String browserName, ITestContext context){
+    public void setup(@Optional("Firefox") String browserName, ITestContext context){
         driverManager = new DriverManager();
         driver = driverManager.getDriver(browserName);
         context.setAttribute("WebDriver", driver);

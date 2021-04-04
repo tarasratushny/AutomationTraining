@@ -1,4 +1,4 @@
-package com.miamato.test;
+package com.miamato.steam;
 
 import com.miamato.BaseTest;
 import com.miamato.PropertyManager;
