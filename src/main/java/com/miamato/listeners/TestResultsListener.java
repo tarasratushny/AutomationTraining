@@ -27,7 +27,7 @@ public class TestResultsListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         logger.error(result.getTestClass().getName() + "." + result.getMethod().getMethodName() + " --- Test case FAILED");
         LogUtil.logStackTrace(result.getThrowable(), logger);
-    //    ReportUtils.makeScreenshot("Failure screen", (WebDriver) result.getTestContext().getAttribute("WebDriver"));
+        ReportUtils.makeScreenshot("Failure screen", (WebDriver) result.getTestContext().getAttribute("WebDriver"));
     }
 
     @Override

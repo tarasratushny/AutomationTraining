@@ -9,6 +9,7 @@ import com.miamato.pageobject.steam.SearchResultsPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -29,9 +30,10 @@ public abstract class BaseTest {
 
     @Parameters("browserName")
     @BeforeClass
-    public void setup(@Optional("Chrome") String browserName){
+    public void setup(@Optional("Chrome") String browserName, ITestContext context){
         driverManager = new DriverManager();
         driver = driverManager.getDriver(browserName);
+        context.setAttribute("WebDriver", driver);
         //driver.manage().window().maximize();
 
         homePage = new HomePage(driver);
