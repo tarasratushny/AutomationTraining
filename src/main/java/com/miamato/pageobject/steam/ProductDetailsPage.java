@@ -14,13 +14,15 @@ public class ProductDetailsPage extends BasePage {
     private static final Logger logger = LogManager.getLogger(ProductDetailsPage.class.getSimpleName());
 
     @FindBy(xpath = "//div[@class='date']")
-    public WebElement PDP_RELEASE_DATE_XPATH;
+    public WebElement pdpReleaseDate;
     @FindBy(xpath = "//div[@id='developers_list']/child::a")
-    public WebElement PDP_DEVELOPERS_LIST_XPATH;
+    public WebElement pdpDevelopersList;
     @FindBy(xpath = "(//div[text()='Publisher:']/following::a)[1]")
-    public WebElement PDP_PUBLISHERS_LIST_XPATH;
+    public WebElement pdpPublishersList;
     @FindBy(xpath = "//div[@class='game_area_purchase_game']//div[@class='discount_original_price']")
-    public WebElement PDP_MAIN_PRODUCT_ORIGINAL_PRICE;
+    public WebElement pdpMainProductOriginalPrice;
+    @FindBy(xpath = "//div[@id='agegate_box']/h2")
+    public WebElement ageGateMessaege;
 
 
     public ProductDetailsPage(WebDriver driver, PropertyManager propertyManager){

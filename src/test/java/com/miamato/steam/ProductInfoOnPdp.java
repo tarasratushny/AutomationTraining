@@ -14,7 +14,7 @@ public class ProductInfoOnPdp extends BaseTest {
     public void discountedProductInfoOnPdp(){
         homePage.open()
                 .searchByGameTitle(propertyManager.getProperty("game.with.discount.title"));
-        searchResultsPage.selectProductByPosition(Integer.parseInt(propertyManager.getProperty("game.with.discount.position.in.search")));
+        searchResultsPage.selectProductByPosition(propertyManager.getProperty("game.with.discount.position.in.search"));
         ageConfirmationPage.selectBirthDate(propertyManager.getProperty("birth.day")
                                             ,propertyManager.getProperty("birth.month")
                                             ,propertyManager.getProperty("birth.year"))
@@ -29,21 +29,21 @@ public class ProductInfoOnPdp extends BaseTest {
     @Step("Check that release date is {expectedReleaseDate}")
     private void assertPdpReleaseDate(String expectedReleaseDate){
         assertLogger.info("Verifying release date on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.PDP_RELEASE_DATE_XPATH, expectedReleaseDate, driver, assertLogger);
+        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpReleaseDate, expectedReleaseDate, driver, assertLogger);
     }
     @Step("Check that publisher name is {expectedPublisherName}")
     private void assertPdpPublisherName(String expectedPublisherName){
         assertLogger.info("Verifying publisher name on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.PDP_PUBLISHERS_LIST_XPATH, expectedPublisherName, driver, assertLogger);
+        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpPublishersList, expectedPublisherName, driver, assertLogger);
     }
     @Step("Check that developer name is {expectedReleaseDate}")
     private void assertPdpDeveloperName(String expectedDeveloperName){
         assertLogger.info("Verifying developer name on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.PDP_DEVELOPERS_LIST_XPATH, expectedDeveloperName, driver, assertLogger);
+        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpDevelopersList, expectedDeveloperName, driver, assertLogger);
     }
     @Step("Check that original price is {expectedOriginalPrice}")
     private void assertPdpOriginalPriceForDiscountedProduct(String expectedOriginalPrice){
         assertLogger.info("Verifying original price on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.PDP_MAIN_PRODUCT_ORIGINAL_PRICE, expectedOriginalPrice, driver, assertLogger);
+        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpMainProductOriginalPrice, expectedOriginalPrice, driver, assertLogger);
     }
 }

@@ -15,7 +15,7 @@ public class HomePage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(HomePage.class.getSimpleName());
     private final String HOME_PAGE_URL = propertyManager.getProperty("homepage.url");
-    private final String PAGE_TITLE = propertyManager.getProperty("homepage.title");
+    public final String PAGE_TITLE = propertyManager.getProperty("homepage.title");
 
     @FindBy(xpath = "//input[@id='store_nav_search_term']")
     public WebElement SEARCH_FIELD;

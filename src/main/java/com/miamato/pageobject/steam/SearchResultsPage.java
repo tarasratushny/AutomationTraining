@@ -32,4 +32,8 @@ public class SearchResultsPage extends BasePage {
         return this;
     }
 
+    public SearchResultsPage selectProductByPosition(String position){
+        return selectProductByPosition(Integer.parseInt(position));
+    }
+
 }
