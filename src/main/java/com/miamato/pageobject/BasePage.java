@@ -23,40 +23,6 @@ public abstract class BasePage extends Page {
         this.propertyManager = propertyManager;
     }
 
-    protected void checkPageTitle(String title, Logger logger){
-        logger.info("Verifying if page title is equal to: " + title);
-        Assert.assertEquals(driver.getTitle(), title);
-        logger.info("Page title is correct: \"" + title + "\"");
-    }
-
-    protected void pressKey(Keys key, Logger logger){
-        logger.info("Pressing key: " + key.name());
-        Actions actions = new Actions(driver);
-        actions.sendKeys(key).perform();
-    }
-    protected void openWebPage(String url, Logger logger){
-        logger.info("Navigating to website with url:   " + url);
-        driver.navigate().to(url);
-    }
-
-    protected void enterTextIntoField(WebElement element, String text, Logger logger){
-        logger.info("Entering text: \"" + text + "\" into field: " + element);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(element, text).perform();
-    }
-
-    protected void clickOnElement(WebElement element, Logger logger){
-        logger.info("Clicking on element: " + element);
-        Actions actions = new Actions(driver);
-        actions.click(element).perform();
-    }
-
-    protected void clickOnElement(List<WebElement> elements, int position, Logger logger){
-        logger.info("Clicking on element: " + elements.get(position-1));
-        Actions actions = new Actions(driver);
-        actions.click(elements.get(position-1)).perform();
-    }
-
     protected void selectFromDropdownByValue(WebElement element, String value, Logger logger){
         logger.info("Trying to select option: \"" + value + "\" from dropdown: " + element);
         Select dropdown = new Select(element);

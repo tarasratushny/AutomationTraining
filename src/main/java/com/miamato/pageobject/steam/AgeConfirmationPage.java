@@ -71,7 +71,7 @@ public class AgeConfirmationPage extends BasePage {
     @Step("Press View Page button")
     public AgeConfirmationPage confirmCustomerAge(){
         logger.info("Checking if you are eligible for accessing target page");
-        clickOnElement(viewPageButton, logger);
+        viewPageButton.click();
         return this;
     }
 

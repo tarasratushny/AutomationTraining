@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class HomePage extends BasePage {
 
@@ -18,7 +19,7 @@ public class HomePage extends BasePage {
     public final String PAGE_TITLE = propertyManager.getProperty("homepage.title");
 
     @FindBy(xpath = "//input[@id='store_nav_search_term']")
-    public WebElement SEARCH_FIELD;
+    public WebElement searchField;
 
     public HomePage(WebDriver driver, PropertyManager propertyManager){
         super(driver, propertyManager);
@@ -27,16 +28,16 @@ public class HomePage extends BasePage {
     @Step("Open application home page")
     public HomePage open(){
         logger.info("Trying to open application home page");
-        openWebPage(HOME_PAGE_URL, logger);
-        checkPageTitle(PAGE_TITLE, logger);
+        driver.navigate().to(HOME_PAGE_URL);
+        Assert.assertEquals(PAGE_TITLE, driver.getTitle());
         return this;
     }
 
     @Step("Search for a product with name: {gameTitle}")
     public HomePage searchByGameTitle(String gameTitle){
         logger.info("Performing search for product with title: " + gameTitle);
-        enterTextIntoField(SEARCH_FIELD, gameTitle, logger);
-        pressKey(Keys.ENTER, logger);
+        searchField.sendKeys(gameTitle);
+        searchField.sendKeys(Keys.ENTER);
         return this;
     }
 

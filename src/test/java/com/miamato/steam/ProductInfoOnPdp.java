@@ -1,10 +1,11 @@
 package com.miamato.steam;
 
 import com.miamato.BaseTest;
-import com.miamato.PropertyManager;
-import com.miamato.asserts.TextAsserts;
-import com.miamato.pageobject.steam.ProductDetailsPage;
 import io.qameta.allure.Step;
+import java.time.Duration;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ProductInfoOnPdp extends BaseTest {
@@ -19,31 +20,38 @@ public class ProductInfoOnPdp extends BaseTest {
                                             ,propertyManager.getProperty("birth.month")
                                             ,propertyManager.getProperty("birth.year"))
                 .confirmCustomerAge();
+        checkPdpTitle();
         assertPdpReleaseDate(propertyManager.getProperty("game.with.discount.release.date"));
         assertPdpDeveloperName(propertyManager.getProperty("game.with.discount.developer"));
         assertPdpPublisherName(propertyManager.getProperty("game.with.discount.publisher"));
         assertPdpOriginalPriceForDiscountedProduct(propertyManager.getProperty("game.with.discount.original.price"));
     }
 
+    @Step("Check pdp title")
+    private void checkPdpTitle(){
+        assertLogger.info("Check if page title is correct");
+        Assert.assertEquals(propertyManager.getProperty("game.with.discount.pdp.title"), driver.getTitle());
+    }
 
     @Step("Check that release date is {expectedReleaseDate}")
     private void assertPdpReleaseDate(String expectedReleaseDate){
         assertLogger.info("Verifying release date on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpReleaseDate, expectedReleaseDate, driver, assertLogger);
+        Assert.assertEquals(expectedReleaseDate, new WebDriverWait(driver, Duration.ofSeconds(3))
+            .until(ExpectedConditions.visibilityOf(productDetailsPage.pdpReleaseDate)).getText());
     }
     @Step("Check that publisher name is {expectedPublisherName}")
     private void assertPdpPublisherName(String expectedPublisherName){
         assertLogger.info("Verifying publisher name on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpPublishersList, expectedPublisherName, driver, assertLogger);
+        Assert.assertEquals(expectedPublisherName, productDetailsPage.pdpPublishersList.getText());
     }
     @Step("Check that developer name is {expectedReleaseDate}")
     private void assertPdpDeveloperName(String expectedDeveloperName){
         assertLogger.info("Verifying developer name on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpDevelopersList, expectedDeveloperName, driver, assertLogger);
+        Assert.assertEquals(expectedDeveloperName, productDetailsPage.pdpDevelopersList.getText());
     }
     @Step("Check that original price is {expectedOriginalPrice}")
     private void assertPdpOriginalPriceForDiscountedProduct(String expectedOriginalPrice){
         assertLogger.info("Verifying original price on PDP page");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.pdpMainProductOriginalPrice, expectedOriginalPrice, driver, assertLogger);
+        Assert.assertEquals(expectedOriginalPrice, productDetailsPage.pdpMainProductOriginalPrice.getText());
     }
 }

@@ -1,9 +1,11 @@
 package com.miamato.steam;
 
 import com.miamato.BaseTest;
-import com.miamato.asserts.TextAsserts;
 import io.qameta.allure.Step;
+import java.time.Duration;
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 public class AgeConfirmationErrorCheck extends BaseTest {
@@ -41,7 +43,10 @@ public class AgeConfirmationErrorCheck extends BaseTest {
     @Step("Check error message for failed age validation")
     private void checkAgeValidationErrorMessage(String expectedMessage){
         assertLogger.info("Verifying error message for failed age validation");
-        TextAsserts.assertThatTextIsPresentInField(ageConfirmationPage.errorMessageAgeInvalid, expectedMessage, driver, assertLogger);
+        Assert.assertEquals(expectedMessage,
+            new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOf(ageConfirmationPage.errorMessageAgeInvalid))
+                .getText());
     }
 
     @Step("Check OK button is clickable on age validation error page")
@@ -60,6 +65,6 @@ public class AgeConfirmationErrorCheck extends BaseTest {
     @Step("Check age validation error message on second search attempt")
     private void checkAgeValidationErrorOnSecondSearch(String expectedMessage){
         assertLogger.info("Verifying error message for failed age validation on second search attempt");
-        TextAsserts.assertThatTextIsPresentInField(productDetailsPage.ageGateMessaege, expectedMessage, driver, assertLogger);
+        Assert.assertEquals(expectedMessage, productDetailsPage.ageGateMessaege.getText());
     }
 }

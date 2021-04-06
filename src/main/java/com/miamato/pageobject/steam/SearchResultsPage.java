@@ -17,7 +17,7 @@ public class SearchResultsPage extends BasePage {
     private static final Logger logger = LogManager.getLogger(SearchResultsPage.class.getSimpleName());
 
     @FindAll(@FindBy(xpath = "//a[contains(@class,'search_result_row')]"))
-    public List<WebElement> SEARCH_RESULTS_PRODUCT_TILES;
+    public List<WebElement> searchResultsProdutTiles;
 
 
     public SearchResultsPage(WebDriver driver, PropertyManager propertyManager){
@@ -28,7 +28,7 @@ public class SearchResultsPage extends BasePage {
     @Step("Select product with {position} position in search results")
     public SearchResultsPage selectProductByPosition(int position){
         logger.info("Trying to select product with position: " + position + " from search results");
-        clickOnElement(SEARCH_RESULTS_PRODUCT_TILES, position, logger);
+        searchResultsProdutTiles.get(position-1).click();
         return this;
     }
 

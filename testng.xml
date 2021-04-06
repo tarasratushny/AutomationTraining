@@ -10,6 +10,7 @@
     <parameter name="testDataFileName" value="default.properties"/>
     <classes>
       <class name="com.miamato.steam.ProductInfoOnPdp" />
+      <class name="com.miamato.steam.AgeConfirmationErrorCheck" />
     </classes>
   </test>
   <test name="Allure Reports Example Chrome">
@@ -17,6 +18,7 @@
     <parameter name="testDataFileName" value="otherEnv.properties" />
     <classes>
       <class name="com.miamato.steam.ProductInfoOnPdp" />
+      <class name="com.miamato.steam.AgeConfirmationErrorCheck" />
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
