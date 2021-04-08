@@ -6,18 +6,21 @@ import com.miamato.valueobjects.Address;
 import com.miamato.valueobjects.Customer;
 import io.qameta.allure.Step;
 import java.sql.Timestamp;
+import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(LoginPage.class.getSimpleName());
     private final String EMAIL_SUFFIX = "customer@unexisting.email";
 
-    @FindBy(xpath = "//a[@id='email_create']")
+    @FindBy(xpath = "//input[@id='email_create']")
     public WebElement newCustomerEmailAddress;
     @FindBy(xpath = "//button[@id='SubmitCreate']")
     public WebElement createAccountButton;
@@ -36,6 +39,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//select[@id='years']")
     public WebElement birtYearDropdown;
 
+    @FindBy(xpath = "//h3[contains(text(),'Your personal information')]")
+    public WebElement personalInfoTitle;
     @FindBy(xpath = "//input[@id='firstname']")
     public WebElement addressFirstName;
     @FindBy(xpath = "//input[@id='lastname']")
@@ -86,7 +91,9 @@ public class LoginPage extends BasePage {
         logger.info("Generating unique email for customer");
         long customerIndex = new Timestamp(System.currentTimeMillis()).getTime();
         logger.info("Entering generated email: " + customerIndex + EMAIL_SUFFIX);
-        newCustomerEmailAddress.sendKeys(customerIndex + EMAIL_SUFFIX);
+        new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(1)).until(
+            ExpectedConditions.visibilityOf(newCustomerEmailAddress)).sendKeys(customerIndex + EMAIL_SUFFIX);
+        //newCustomerEmailAddress.sendKeys(customerIndex + EMAIL_SUFFIX);
         customer.setEmail(customerIndex+EMAIL_SUFFIX);
         return this;
     }
@@ -100,6 +107,9 @@ public class LoginPage extends BasePage {
 
     @Step("Enter customer personal information")
     public LoginPage enterPersonalInformation(Customer customer){
+
+        new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(1))
+            .until(ExpectedConditions.visibilityOf(personalInfoTitle));
         logger.info("Entering customer name");
         firstName.sendKeys(customer.name);
         logger.info("Entering customer last name");
@@ -108,7 +118,7 @@ public class LoginPage extends BasePage {
         passwordFieldOnCreationForm.sendKeys(customer.password);
         logger.info("Selecting birth date from dropdown");
         selectFromDropdownByValue(birthDayDropdown, customer.birthDay, logger);
-        selectFromDropdownByValue(birthMonthDropdown, customer.birthMonth, logger);
+        selectFromDropdownByVisibleText(birthMonthDropdown, customer.birthMonth, logger);
         selectFromDropdownByValue(birtYearDropdown, customer.birthYear, logger);
         return this;
     }
@@ -134,11 +144,11 @@ public class LoginPage extends BasePage {
         logger.info("Entering address city");
         addressCity.sendKeys(address.city);
         logger.info("Selecting city from dropdown");
-        selectFromDropdownByValue(addressStateDropdown, address.state, logger);
+        selectFromDropdownByVisibleText(addressStateDropdown, address.state, logger);
         logger.info("Entering address postal code");
         addressPostCode.sendKeys(address.postalCode);
         logger.info("Selecting city from dropdown");
-        selectFromDropdownByValue(addressCountry, address.country, logger);
+        selectFromDropdownByVisibleText(addressCountry, address.country, logger);
         logger.info("Entering address additional info");
         addressAdditonalInfo.sendKeys(address.additionalInfo);
         logger.info("Entering address home phone");
@@ -146,6 +156,7 @@ public class LoginPage extends BasePage {
         logger.info("Entering address mobile phone");
         addressMobilePhone.sendKeys(address.mobilePhone);
         logger.info("Entering address alias");
+        addressAlias.clear();
         addressAlias.sendKeys(address.addressAlias);
         return this;
     }

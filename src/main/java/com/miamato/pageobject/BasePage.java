@@ -34,4 +34,15 @@ public abstract class BasePage extends Page {
         }
     }
 
+    protected void selectFromDropdownByVisibleText(WebElement element, String text, Logger logger){
+        logger.info("Trying to select option: \"" + text + "\" from dropdown: " + element);
+        Select dropdown = new Select(element);
+        try {
+            dropdown.selectByVisibleText(text);
+        } catch (Exception e) {
+            logger.error("Option cannot be selected from dropdown");
+            throw e;
+        }
+    }
+
 }

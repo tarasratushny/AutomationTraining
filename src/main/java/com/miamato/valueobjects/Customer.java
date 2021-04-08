@@ -18,7 +18,7 @@ public class Customer {
         this.title = propertyManager.getProperty(customerType + ".customer.title");
         this.name = propertyManager.getProperty(customerType + ".customer.name");
         this.lastName = propertyManager.getProperty(customerType + ".customer.last.name");
-        this.birthDay = propertyManager.getProperty(customerType + ".customer.birth.day=");
+        this.birthDay = propertyManager.getProperty(customerType + ".customer.birth.day");
         this.birthMonth = propertyManager.getProperty(customerType + ".customer.birth.month");
         this.birthYear = propertyManager.getProperty(customerType + ".customer.birth.year");
         this.password = propertyManager.getProperty(customerType + ".customer.password");

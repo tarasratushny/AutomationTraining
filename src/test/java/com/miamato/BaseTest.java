@@ -4,6 +4,8 @@ import com.miamato.listeners.TestReporter;
 import com.miamato.listeners.TestResultsListener;
 import com.miamato.pageobject.clothstore.LoginPage;
 import com.miamato.pageobject.clothstore.HomePage;
+import com.miamato.pageobject.clothstore.MyAccountPage;
+import com.miamato.pageobject.clothstore.MyAddressesPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -26,11 +28,13 @@ public abstract class BaseTest {
 
     protected HomePage homePage;
     protected LoginPage loginPage;
+    protected MyAddressesPage myAddressesPage;
+    protected MyAccountPage myAccountPage;
 
     @Parameters({"browserName","testDataFileName"})
     @BeforeClass
     public void setup(@Optional("Chrome") String browserName
-                , @Optional("default.properties") String testDataFileName
+                , @Optional("clothsStore.properties") String testDataFileName
                 , ITestContext context){
         driverManager = new DriverManager();
         driver = driverManager.getDriver(browserName);
@@ -40,7 +44,8 @@ public abstract class BaseTest {
         propertyManager = new PropertyManager(testDataFileName);
         homePage = new HomePage(driver, propertyManager);
         loginPage = new LoginPage(driver, propertyManager);
-
+        myAccountPage = new MyAccountPage(driver, propertyManager);
+        myAddressesPage = new MyAddressesPage(driver, propertyManager);
     }
 
     @AfterMethod
