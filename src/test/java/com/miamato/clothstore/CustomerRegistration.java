@@ -4,6 +4,7 @@ import com.miamato.BaseTest;
 import com.miamato.valueobjects.Address;
 import com.miamato.valueobjects.Customer;
 import io.qameta.allure.Step;
+import java.util.Locale;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -66,6 +67,6 @@ public class CustomerRegistration extends BaseTest {
         assertLogger.info("Checking address mobilePhone");
         Assert.assertEquals(myAddressesPage.firstAddressHomeMobilePhone.getText().trim(), address.mobilePhone);
         assertLogger.info("Checking address addressAlias");
-        Assert.assertEquals(myAddressesPage.firstAddressAlias.getText().trim(), address.addressAlias);
+        Assert.assertEquals(myAddressesPage.firstAddressAlias.getText().trim(), address.addressAlias.toUpperCase(Locale.ROOT));
     }
 }
