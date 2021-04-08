@@ -2,10 +2,8 @@ package com.miamato;
 
 import com.miamato.listeners.TestReporter;
 import com.miamato.listeners.TestResultsListener;
-import com.miamato.pageobject.steam.AgeConfirmationPage;
-import com.miamato.pageobject.steam.HomePage;
-import com.miamato.pageobject.steam.ProductDetailsPage;
-import com.miamato.pageobject.steam.SearchResultsPage;
+import com.miamato.pageobject.clothstore.LoginPage;
+import com.miamato.pageobject.clothstore.HomePage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -23,12 +21,11 @@ public abstract class BaseTest {
     protected WebDriver driver;
     public static final Logger assertLogger = LogManager.getLogger("Assert");
 
-    protected HomePage homePage;
-    protected SearchResultsPage searchResultsPage;
-    protected AgeConfirmationPage ageConfirmationPage;
-    protected ProductDetailsPage productDetailsPage;
     protected DriverManager driverManager;
     protected PropertyManager propertyManager;
+
+    protected HomePage homePage;
+    protected LoginPage loginPage;
 
     @Parameters({"browserName","testDataFileName"})
     @BeforeClass
@@ -41,11 +38,9 @@ public abstract class BaseTest {
         //driver.manage().window().maximize();
 
         propertyManager = new PropertyManager(testDataFileName);
-
         homePage = new HomePage(driver, propertyManager);
-        searchResultsPage = new SearchResultsPage(driver, propertyManager);
-        ageConfirmationPage = new AgeConfirmationPage(driver, propertyManager);
-        productDetailsPage = new ProductDetailsPage(driver, propertyManager);
+        loginPage = new LoginPage(driver, propertyManager);
+
     }
 
     @AfterMethod
