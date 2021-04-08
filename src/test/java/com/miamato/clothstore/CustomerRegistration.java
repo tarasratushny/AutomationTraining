@@ -6,15 +6,23 @@ import com.miamato.valueobjects.Customer;
 import io.qameta.allure.Step;
 import java.util.Locale;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CustomerRegistration extends BaseTest {
 
 
+    @DataProvider
+    public Object[][] customerTypes(){
+        return new Object[][]{
+            {"default"},
+            {"max.length"}
+        };
+    }
 
-    @Test
-    public void customerRegistrationSmoke(){
-        Customer customer = new Customer(propertyManager, "default");
+    @Test(dataProvider = "customerTypes")
+    public void customerRegistrationSmoke(String customerType){
+        Customer customer = new Customer(propertyManager, customerType);
 
         homePage.open()
                 .clickLoginButton();
