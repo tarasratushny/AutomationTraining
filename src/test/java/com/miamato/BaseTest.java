@@ -20,7 +20,7 @@ import org.testng.annotations.Parameters;
 @Listeners({TestResultsListener.class, TestReporter.class})
 public abstract class BaseTest {
 
-    protected WebDriver driver;
+    protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static final Logger assertLogger = LogManager.getLogger("Assert");
 
     protected DriverManager driverManager;
@@ -37,25 +37,24 @@ public abstract class BaseTest {
                 , @Optional("clothsStore.properties") String testDataFileName
                 , ITestContext context){
         driverManager = new DriverManager();
-        driver = driverManager.getDriver(browserName);
-        context.setAttribute("WebDriver", driver);
-        //driver.manage().window().maximize();
+        driver.set(driverManager.getDriver(browserName));
+        context.setAttribute("WebDriver", driver.get());
 
         propertyManager = new PropertyManager(testDataFileName);
-        homePage = new HomePage(driver, propertyManager);
-        loginPage = new LoginPage(driver, propertyManager);
-        myAccountPage = new MyAccountPage(driver, propertyManager);
-        myAddressesPage = new MyAddressesPage(driver, propertyManager);
+        homePage = new HomePage(driver.get(), propertyManager);
+        loginPage = new LoginPage(driver.get(), propertyManager);
+        myAccountPage = new MyAccountPage(driver.get(), propertyManager);
+        myAddressesPage = new MyAddressesPage(driver.get(), propertyManager);
     }
 
     @AfterMethod
     public void browserReset(){
-        driver.manage().deleteAllCookies();
+        driver.get().manage().deleteAllCookies();
 
     }
 
     @AfterClass
     public void cleanUp(){
-        driver.quit();
+        driver.get().quit();
     }
 }
