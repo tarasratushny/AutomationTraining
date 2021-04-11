@@ -1,5 +1,6 @@
 package com.miamato;
 
+import com.miamato.drivers.DriverManager;
 import com.miamato.listeners.TestReporter;
 import com.miamato.listeners.TestResultsListener;
 import com.miamato.pageobject.clothstore.LoginPage;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -34,10 +36,10 @@ public abstract class BaseTest {
     @Parameters({"browserName","testDataFileName"})
     @BeforeClass
     public void setup(@Optional("Chrome") String browserName
-                , @Optional("clothsStore.properties") String testDataFileName
-                , ITestContext context){
+                , @Optional("clothsStore.properties") String testDataFileName){
         driverManager = new DriverManager();
-        driver.set(driverManager.getDriver(browserName));
+        driver.set(driverManager.getDriver(browserName, "Grid"));
+        ITestContext context = Reporter.getCurrentTestResult().getTestContext();
         context.setAttribute("WebDriver", driver.get());
 
         propertyManager = new PropertyManager(testDataFileName);
@@ -56,5 +58,6 @@ public abstract class BaseTest {
     @AfterClass
     public void cleanUp(){
         driver.get().quit();
+        driver.remove();
     }
 }
