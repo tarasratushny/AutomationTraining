@@ -21,14 +21,14 @@
   </test>
   <test name="Allure Reports Example Firefox">
     <parameter name="browserName" value="Firefox" />
-    <parameter name="testDataFileName" value="clothsStore.properties" />
+    <parameter name="testDataFileName" value="otherStore.properties" />
     <classes>
       <class name="com.miamato.clothstore.CustomerRegistration" />
     </classes>
   </test>
   <test name="Allure Reports Example Firefox 2">
     <parameter name="browserName" value="Firefox" />
-    <parameter name="testDataFileName" value="clothsStore.properties" />
+    <parameter name="testDataFileName" value="otherStore.properties" />
     <classes>
       <class name="com.miamato.clothstore.CustomerRegistration" />
     </classes>
