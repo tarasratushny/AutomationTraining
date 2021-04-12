@@ -9,25 +9,25 @@ public class CapabilityManager {
 
     public static ChromeOptions getChromeOptions(){
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--start-maximised");
-        chromeOptions.addArguments("--ignore-certificate-errors");
-        chromeOptions.addArguments("--disable-popup-blocking");
+        chromeOptions.setCapability("acceptInsecureCerts", true);
+        chromeOptions.addArguments("start-maximized");
         return chromeOptions;
     }
 
     public static FirefoxOptions getFirefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.addArguments("--start-maximised");
         FirefoxProfile profile = new FirefoxProfile();
         profile.setAcceptUntrustedCertificates(true);
         profile.setPreference("network.proxy.type", 0);
         firefoxOptions.setProfile(profile);
+        firefoxOptions.setCapability("acceptInsecureCerts", true);
         return firefoxOptions;
     }
 
     public static EdgeOptions getEdgeOptions(){
         EdgeOptions edgeOptions = new EdgeOptions();
-        edgeOptions.addArguments("--start-maximised");
+        edgeOptions.setCapability("acceptInsecureCerts", true);
+        edgeOptions.addArguments("start-maximized");
         return edgeOptions;
     }
 
