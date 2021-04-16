@@ -19,7 +19,6 @@ public class LoginPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(LoginPage.class.getSimpleName());
     private final String EMAIL_SUFFIX = "customer@unexisting.email";
-
     @FindBy(xpath = "//input[@id='email_create']")
     public WebElement newCustomerEmailAddress;
     @FindBy(xpath = "//button[@id='SubmitCreate']")

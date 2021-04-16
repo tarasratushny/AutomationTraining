@@ -24,45 +24,28 @@ public class DriverManager {
         WebDriver requestedDriver = null;
         switch (driverType.toUpperCase(Locale.ROOT)) {
             case "CHROME" -> {
-                log.info("Chrome driver selected");
+                log.info("Chrome driver selected, grid mode: " + gridMode);
                 requestedDriver = gridMode.toUpperCase(Locale.ROOT).equals("GRID") ?
-                    getRemoteDriver(CapabilityManager.getChromeOptions()) : getLocalChrome();
+                    getRemoteDriver(CapabilityManager.getChromeOptions()) : new ChromeDriver(CapabilityManager.getChromeOptions());
             }
             case "FIREFOX" -> {
-                log.info("Firefox driver selected");
+                log.info("Firefox driver selected, grid mode: " + gridMode);
                 requestedDriver = gridMode.toUpperCase(Locale.ROOT).equals("GRID") ?
-                    getRemoteDriver(CapabilityManager.getFirefoxOptions()) : getLocalFirefox();
+                    getRemoteDriver(CapabilityManager.getFirefoxOptions()) : new FirefoxDriver(CapabilityManager.getFirefoxOptions());
             }
             case "EDGE" -> {
-                log.info("Edge driver selected");
+                log.info("Edge driver selected, grid mode: " + gridMode);
                 requestedDriver = gridMode.toUpperCase(Locale.ROOT).equals("GRID") ?
-                    getRemoteDriver(CapabilityManager.getEdgeOptions()) : getLocalEdge();
+                    getRemoteDriver(CapabilityManager.getEdgeOptions()) : new EdgeDriver(CapabilityManager.getEdgeOptions());
             }
         }
         return requestedDriver;
     }
 
-    private WebDriver getLocalChrome(){
-        log.info("Setting up new ChromeDriver");
-        System.setProperty("webdriver.chrome.driver", System.getProperty("driver.path") + "/chromedriver.exe");
-        return new ChromeDriver(CapabilityManager.getChromeOptions());
-    }
-    private WebDriver getLocalFirefox(){
-        //firefox requires not only browser to be installed but also profile to be created.
-        log.info("Setting up new FirefoxDriver");
-        System.setProperty("webdriver.gecko.driver", System.getProperty("driver.path") + "/geckodriver.exe");
-        return new FirefoxDriver(CapabilityManager.getFirefoxOptions());
-    }
-
-    private WebDriver getLocalEdge(){
-        log.info("Setting up new EdgeDriver");
-        System.setProperty("webdriver.edge.driver", System.getProperty("driver.path") + "/msedgedriver.exe");
-        return new EdgeDriver(CapabilityManager.getEdgeOptions());
-    }
-
     private WebDriver getRemoteDriver(Capabilities capabilities){
         WebDriver requestedDriver = null;
         try{
+
             requestedDriver = new RemoteWebDriver(new URL(System.getProperty("selenium.grid.url")), capabilities);
         } catch (MalformedURLException e) {
             log.error("Remote driver creation failed");

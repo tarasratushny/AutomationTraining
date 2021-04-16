@@ -6,7 +6,7 @@
 
   <groupId>org.miamato</groupId>
   <artifactId>AutomationTraining</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
 
   <properties>
 
@@ -191,7 +191,9 @@
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${version.aspectj}/aspectjweaver-${version.aspectj}.jar"
           </argLine>
           <systemPropertyVariables>
-            <driver.path>${driver.folder}</driver.path>
+            <webdriver.chrome.driver>${driver.folder}/chromedriver.exe</webdriver.chrome.driver>
+            <webdriver.gecko.driver>${driver.folder}/geckodriver.exe</webdriver.gecko.driver>
+            <webdriver.edge.driver>${driver.folder}/msedgedriver.exe</webdriver.edge.driver>
             <test.data.folder>${test.data.folder}</test.data.folder>
             <allure.results.directory>${basedir}/${allure.results.path}</allure.results.directory>
             <selenium.grid.url>${selenium.grid.url}</selenium.grid.url>
